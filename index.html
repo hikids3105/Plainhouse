@@ -6,12 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Plainhouse</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
 </head>
-<body>
+<body class="dark">
   <div class="background-glow"></div>
 
   <header>
     <img src="banner.png" alt="Plainhouse banner" class="banner" />
+    <button onclick="toggleDarkMode()" class="toggle-button">Toggle Theme</button>
   </header>
 
   <main>
@@ -21,8 +27,18 @@
     </section>
 
     <section>
+      <h2>💬 Twitch Chat</h2>
+      <iframe src="https://www.twitch.tv/embed/plainhouse/chat?parent=yourdomain.com" height="400"></iframe>
+    </section>
+
+    <section>
       <h2>📺 Latest YouTube Videos</h2>
       <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=plainhouse126"></iframe>
+    </section>
+
+    <section>
+      <h2>📺 Visit My Channel</h2>
+      <a class="button" href="https://youtube.com/@plainhouse126" target="_blank">Go to YouTube Channel</a>
     </section>
 
     <section>
@@ -33,15 +49,6 @@
     <section>
       <h2>🎧 Now Playing</h2>
       <iframe src="https://spotify-now-playing-widget.vercel.app/api/now-playing?theme=dark" height="80" frameborder="0"></iframe>
-    </section>
-
-    <section>
-      <h2>🗓️ Schedule</h2>
-      <ul class="schedule">
-        <li><strong>Mon:</strong> Coding Streams @ 6PM</li>
-        <li><strong>Wed:</strong> Game Dev + Q&A @ 7PM</li>
-        <li><strong>Fri:</strong> Anime Watch Party @ 8PM</li>
-      </ul>
     </section>
   </main>
 </body>
