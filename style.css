@@ -1,0 +1,74 @@
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0a0a23;
+  color: #e0e0e0;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.background-glow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, #4b0082, #0a0a23);
+  z-index: -1;
+  animation: pulse 10s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.3); }
+}
+
+header .banner {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+main {
+  padding: 20px;
+  max-width: 960px;
+  margin: auto;
+}
+
+section {
+  margin: 40px 0;
+}
+
+iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #00ffcc50;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  background: #7b2ff7;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+.schedule {
+  list-style: none;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  iframe {
+    height: 300px;
+  }
+
+  .banner {
+    max-height: 200px;
+  }
+}
