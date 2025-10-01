@@ -26,6 +26,7 @@ header .banner {
   max-height: 300px;
   object-fit: cover;
   display: block;
+  cursor: pointer; /* subtle hint */
 }
 
 main {
@@ -130,9 +131,46 @@ footer {
   margin: 40px 0 20px;
   font-size: 0.9rem;
   opacity: 0.7;
+  position: relative;
 }
 
 .easter-egg {
   font-size: 0.8rem;
   opacity: 0.5;
+}
+
+/* Hidden Easter Egg icons */
+.hidden-egg {
+  position: absolute;
+  opacity: 0.05;
+  width: 32px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.hidden-egg:hover {
+  opacity: 0.85;
+  transform: scale(1.2);
+}
+
+/* Twitch Egg in bottom left */
+.twitch-egg {
+  bottom: 10px;
+  left: 10px;
+}
+
+/* YouTube Egg in bottom right */
+.youtube-egg {
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  iframe {
+    height: 300px;
+  }
+
+  .banner {
+    max-height: 200px;
+  }
 }
