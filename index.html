@@ -25,7 +25,7 @@
   <div class="background-glow"></div>
 
   <header>
-    <img src="banner.png" alt="Plainhouse banner" class="banner" />
+    <img src="banner.png" alt="Plainhouse banner" class="banner" id="banner" />
     <button onclick="toggleDarkMode()" class="toggle-button">Toggle Theme</button>
   </header>
 
@@ -69,7 +69,13 @@
   <!-- Easter Eggs -->
   <footer>
     <p>© 2025 Plainhouse</p>
-    <p class="easter-egg">Hint: Press <b>P</b> on your keyboard 😉</p>
+    <p class="easter-egg">Hint: Press <b>P</b> or try clicking around 😉</p>
+    <!-- Hidden YouTube Egg -->
+    <img src="youtube.png" alt="YouTube" class="hidden-egg youtube-egg"
+         onclick="window.open('https://youtube.com/@plainhouse126','_blank')">
+    <!-- Hidden Twitch Egg -->
+    <img src="twitch.png" alt="Twitch" class="hidden-egg twitch-egg"
+         onclick="window.open('https://twitch.tv/plainhouse','_blank')">
   </footer>
 
   <script>
@@ -78,6 +84,11 @@
       if (e.key.toLowerCase() === "p") {
         alert("🎉 Secret unlocked! Follow Plainhouse on Twitch & YouTube! 🎉\nTwitch: twitch.tv/plainhouse\nYouTube: youtube.com/@plainhouse126");
       }
+    });
+
+    // Easter Egg - Double click banner
+    document.getElementById("banner").addEventListener("dblclick", () => {
+      alert("🔥 Banner Secret Found! 🔥\nPlainhouse is everywhere... stay tuned!");
     });
   </script>
 </body>
