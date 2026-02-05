@@ -3,32 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Plainhouse</title>
+  <title>Plainhouse | Official Hub</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
     }
 
-    function openTab(tabName) {
+    function openTab(tabName, btn) {
       const tabs = document.querySelectorAll(".tab-content");
       tabs.forEach(tab => tab.style.display = "none");
-      document.getElementById(tabName).style.display = "block";
-    }
-
-    // Function to refresh Spotify widget to ensure "Current Song" is accurate
-    function refreshSpotify() {
-      const spotifyFrame = document.getElementById('spotify-widget');
-      if (spotifyFrame) {
-        // Reloads the iframe src to fetch the latest song
-        spotifyFrame.src = spotifyFrame.src;
-      }
+      
+      const activeTab = document.getElementById(tabName);
+      activeTab.style.display = "block";
+      
+      const buttons = document.querySelectorAll(".tab-bar button");
+      buttons.forEach(b => b.classList.remove("active-btn"));
+      btn.classList.add("active-btn");
     }
 
     window.onload = () => {
-      openTab("twitch"); // default tab
-      // Auto-update music widget every 30 seconds
-      setInterval(refreshSpotify, 30000); 
+      openTab("twitch", document.querySelector(".tab-bar button")); 
     };
   </script>
 </head>
@@ -36,81 +33,117 @@
   <div class="background-glow"></div>
 
   <header>
-    <img src="banner.png" alt="Plainhouse banner" class="banner" id="banner" />
-    <button onclick="toggleDarkMode()" class="toggle-button">Toggle Theme</button>
+    <div class="banner-container">
+      <img src="banner.png" alt="Plainhouse banner" class="banner" id="banner" />
+    </div>
+    <button onclick="toggleDarkMode()" class="toggle-button">Theme</button>
   </header>
 
   <nav class="tab-bar">
-    <button onclick="openTab('twitch')">🎮 Twitch</button>
-    <button onclick="openTab('youtube')">📺 YouTube</button>
-    <button onclick="openTab('discord')">💬 Discord</button>
-    <button onclick="openTab('spotify')">🎧 Spotify</button>
-    <button onclick="openTab('apps')">🚀 Apps</button>
+    <button onclick="openTab('twitch', this)">🎮 Twitch</button>
+    <button onclick="openTab('youtube', this)">📺 YouTube</button>
+    <button onclick="openTab('apps', this)">🚀 Apps</button>
+    <button onclick="openTab('spotify', this)">🎧 Music</button>
   </nav>
 
   <main>
     <section id="twitch" class="tab-content">
-      <h2>🎮 Watch Live</h2>
-      <iframe src="https://player.twitch.tv/?channel=plainhouse&parent=yourdomain.com" allowfullscreen></iframe>
-      <h3>💬 Twitch Chat</h3>
-      <iframe src="https://www.twitch.tv/embed/plainhouse/chat?parent=yourdomain.com"></iframe>
-    </section>
-
-    <section id="youtube" class="tab-content">
-      <h2>📺 Latest YouTube Videos</h2>
-      <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=plainhouse126"></iframe>
-      <a class="button" href="https://youtube.com/@plainhouse126" target="_blank">Go to YouTube Channel</a>
-    </section>
-
-    <section id="discord" class="tab-content">
-      <h2>💬 Join Discord</h2>
-      <a class="button" href="https://discord.gg/fz4fUt3bHh" target="_blank">Join Our Server</a>
-    </section>
-
-    <section id="spotify" class="tab-content">
-      <h2>🎧 Now Playing</h2>
-      <p style="opacity: 0.7; font-size: 0.9rem; margin-bottom: 10px;">Updates automatically...</p>
-      <iframe id="spotify-widget" src="https://spotify-now-playing-widget.vercel.app/api/now-playing?theme=dark" height="80"></iframe>
+      <h2 class="section-title">🎮 Live Stream</h2>
+      <div class="glass-card">
+        <iframe src="https://player.twitch.tv/?channel=plainhouse&parent=yourdomain.com" allowfullscreen></iframe>
+      </div>
     </section>
 
     <section id="apps" class="tab-content">
-      <h2>🚀 My Apps</h2>
+      <h2 class="section-title">🚀 My Projects</h2>
       <div class="app-grid">
-        <div class="app-card">
+        <a href="https://anime-power-forge.base44.app" target="_blank" class="app-card">
+          <div class="app-icon">⚔️</div>
           <h3>Anime Power Forge</h3>
-          <p>Forge your power in this anime-inspired experience.</p>
-          <a class="button app-btn" href="https://anime-power-forge.base44.app" target="_blank">Launch App</a>
-        </div>
-        <div class="app-card">
+          <p>Master your strength in this immersive anime experience.</p>
+          <span class="launch-text">Launch App →</span>
+        </a>
+        <a href="https://pixel-drop-play.base44.app" target="_blank" class="app-card">
+          <div class="app-icon">👾</div>
           <h3>Pixel Drop Play</h3>
-          <p>Dive into the pixelated action.</p>
-          <a class="button app-btn" href="https://pixel-drop-play.base44.app" target="_blank">Launch App</a>
+          <p>Fast-paced pixelated action right in your browser.</p>
+          <span class="launch-text">Launch App →</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="spotify" class="tab-content">
+      <h2 class="section-title">🎧 Audio Sync</h2>
+      <div class="glass-card music-sync">
+        <p>Sync this site with your device's audio for a live visualizer experience.</p>
+        <button id="start-audio" class="main-button">Start Visualizer</button>
+        <div class="visual-wrap">
+          <canvas id="visualizer-canvas"></canvas>
         </div>
+        <p id="status-text" class="status-msg">Ready to detect music...</p>
+      </div>
+    </section>
+
+    <section id="youtube" class="tab-content">
+      <h2 class="section-title">📺 Latest Videos</h2>
+      <div class="glass-card">
+        <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=plainhouse126"></iframe>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Plainhouse</p>
-    <p class="easter-egg">Hint: Press <b>P</b> or try clicking around 😉</p>
-    <img src="youtube.png" alt="YouTube" class="hidden-egg youtube-egg"
-         onclick="window.open('https://youtube.com/@plainhouse126','_blank')">
-    <img src="twitch.png" alt="Twitch" class="hidden-egg twitch-egg"
-         onclick="window.open('https://twitch.tv/plainhouse','_blank')">
+    <p>© 2026 Plainhouse</p>
+    <div class="eggs">
+       <img src="youtube.png" alt="YT" class="egg-icon" onclick="window.open('https://youtube.com/@plainhouse126','_blank')">
+       <img src="twitch.png" alt="TW" class="egg-icon" onclick="window.open('https://twitch.tv/plainhouse','_blank')">
+    </div>
   </footer>
 
   <script>
-    // Easter Egg - Press "P"
-    document.addEventListener("keydown", e => {
-      if (e.key.toLowerCase() === "p") {
-        alert("🎉 Secret unlocked! Follow Plainhouse on Twitch & YouTube! 🎉\nTwitch: twitch.tv/plainhouse\nYouTube: youtube.com/@plainhouse126");
-      }
-    });
+    // --- VISUALIZER SCRIPT ---
+    const startBtn = document.getElementById('start-audio');
+    const canvas = document.getElementById('visualizer-canvas');
+    const ctx = canvas.getContext('2d');
+    const status = document.getElementById('status-text');
 
-    // Easter Egg - Double click banner
-    document.getElementById("banner").addEventListener("dblclick", () => {
-      alert("🔥 Banner Secret Found! 🔥\nPlainhouse is everywhere... stay tuned!");
-    });
+    startBtn.onclick = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioCtx.createMediaStreamSource(stream);
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 128;
+        source.connect(analyser);
+        
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+        
+        startBtn.style.display = "none";
+        status.innerText = "Syncing with your device audio... 🎵";
+
+        function draw() {
+          requestAnimationFrame(draw);
+          analyser.getByteFrequencyData(dataArray);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          let barWidth = (canvas.width / bufferLength) * 2.5;
+          let x = 0;
+
+          for(let i = 0; i < bufferLength; i++) {
+            let barHeight = dataArray[i] / 2;
+            ctx.fillStyle = '#00ffcc';
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#00ffcc';
+            ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
+            x += barWidth;
+          }
+        }
+        draw();
+      } catch (err) {
+        status.innerText = "Error: Please allow audio access in your browser.";
+      }
+    };
   </script>
 </body>
 </html>
