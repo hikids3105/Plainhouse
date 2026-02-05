@@ -16,8 +16,19 @@
       document.getElementById(tabName).style.display = "block";
     }
 
+    // Function to refresh Spotify widget to ensure "Current Song" is accurate
+    function refreshSpotify() {
+      const spotifyFrame = document.getElementById('spotify-widget');
+      if (spotifyFrame) {
+        // Reloads the iframe src to fetch the latest song
+        spotifyFrame.src = spotifyFrame.src;
+      }
+    }
+
     window.onload = () => {
       openTab("twitch"); // default tab
+      // Auto-update music widget every 30 seconds
+      setInterval(refreshSpotify, 30000); 
     };
   </script>
 </head>
@@ -29,16 +40,15 @@
     <button onclick="toggleDarkMode()" class="toggle-button">Toggle Theme</button>
   </header>
 
-  <!-- Navigation Tabs -->
   <nav class="tab-bar">
     <button onclick="openTab('twitch')">🎮 Twitch</button>
     <button onclick="openTab('youtube')">📺 YouTube</button>
     <button onclick="openTab('discord')">💬 Discord</button>
     <button onclick="openTab('spotify')">🎧 Spotify</button>
+    <button onclick="openTab('apps')">🚀 Apps</button>
   </nav>
 
   <main>
-    <!-- Twitch -->
     <section id="twitch" class="tab-content">
       <h2>🎮 Watch Live</h2>
       <iframe src="https://player.twitch.tv/?channel=plainhouse&parent=yourdomain.com" allowfullscreen></iframe>
@@ -46,34 +56,45 @@
       <iframe src="https://www.twitch.tv/embed/plainhouse/chat?parent=yourdomain.com"></iframe>
     </section>
 
-    <!-- YouTube -->
     <section id="youtube" class="tab-content">
       <h2>📺 Latest YouTube Videos</h2>
       <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=plainhouse126"></iframe>
       <a class="button" href="https://youtube.com/@plainhouse126" target="_blank">Go to YouTube Channel</a>
     </section>
 
-    <!-- Discord -->
     <section id="discord" class="tab-content">
       <h2>💬 Join Discord</h2>
       <a class="button" href="https://discord.gg/fz4fUt3bHh" target="_blank">Join Our Server</a>
     </section>
 
-    <!-- Spotify -->
     <section id="spotify" class="tab-content">
       <h2>🎧 Now Playing</h2>
-      <iframe src="https://spotify-now-playing-widget.vercel.app/api/now-playing?theme=dark" height="80"></iframe>
+      <p style="opacity: 0.7; font-size: 0.9rem; margin-bottom: 10px;">Updates automatically...</p>
+      <iframe id="spotify-widget" src="https://spotify-now-playing-widget.vercel.app/api/now-playing?theme=dark" height="80"></iframe>
+    </section>
+
+    <section id="apps" class="tab-content">
+      <h2>🚀 My Apps</h2>
+      <div class="app-grid">
+        <div class="app-card">
+          <h3>Anime Power Forge</h3>
+          <p>Forge your power in this anime-inspired experience.</p>
+          <a class="button app-btn" href="https://anime-power-forge.base44.app" target="_blank">Launch App</a>
+        </div>
+        <div class="app-card">
+          <h3>Pixel Drop Play</h3>
+          <p>Dive into the pixelated action.</p>
+          <a class="button app-btn" href="https://pixel-drop-play.base44.app" target="_blank">Launch App</a>
+        </div>
+      </div>
     </section>
   </main>
 
-  <!-- Easter Eggs -->
   <footer>
     <p>© 2025 Plainhouse</p>
     <p class="easter-egg">Hint: Press <b>P</b> or try clicking around 😉</p>
-    <!-- Hidden YouTube Egg -->
     <img src="youtube.png" alt="YouTube" class="hidden-egg youtube-egg"
          onclick="window.open('https://youtube.com/@plainhouse126','_blank')">
-    <!-- Hidden Twitch Egg -->
     <img src="twitch.png" alt="Twitch" class="hidden-egg twitch-egg"
          onclick="window.open('https://twitch.tv/plainhouse','_blank')">
   </footer>
